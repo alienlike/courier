@@ -6,7 +6,7 @@ A messaging platform
 Getting Started
 ---------------
 
-- cd <directory containing this file>
+- cd [directory containing this file]
 
 - $venv/bin/python setup.py develop
 
