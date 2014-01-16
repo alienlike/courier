@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+    <title>Inbox</title>
+    <!-- scripts -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- styles -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- some style tweaks particular to this page -->
+    <style type="text/css">
+        body {
+            padding: 20px 0 20px 0;
+        }
+        .pagination {
+            height: 26px !important;
+            margin: 0 !important;
+        }
+        .pagination a {
+            line-height: 24px;
+        }
+        .label-count {
+            border-radius: 3px 3px 3px 3px;
+            font-size: 9.75px;
+            font-weight: bold;
+            padding: 1px 5px 2px;
+        }
+        .label-count {
+            background-color: transparent;
+            color: #0088CC;
+        }
+        li.active .label-count {
+            color: #FFFFFF;
+        }
+        li.active i {
+            background-image: url(../img/glyphicons-halflings-white.png);
+        }
+        .read h3 {
+            font-weight: normal !important;
+        }
+        .read td {
+            background-color: #F5F5F5;
+        }
+        .message-hover td {
+            background-color: #EBF8FF;
+        }
+        .active td {
+            background-color: #EBF8FF;
+        }
+        td.checkbox_cell {
+            width: 15px;
+        }
+        td input[type="checkbox"] {
+            margin: 2px;
+        }
+        .sort-search, .nav-pills, table {
+            margin-bottom: 10px !important;
+        }
+        .btn-group {
+            margin-right: 5px;
+        }
+        #contact_search {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<form method="get" action="inbox">
+
+    <div class="container">
+        <!-- navigation bar -->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container" style="width: auto;">
+                    <!-- branding -->
+                    <a class="brand" href="#">Project Courier</a>
+                    <!-- menu items -->
+                    <div class="nav-collapse">
+                        <ul class="nav pull-right">
+                            <li><a href="#">Compose message</a></li>
+                            <li><a href="#">Add contact</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Nathaniel Wingfield
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Account</a></li>
+                                    <li><a href="#">Log out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- sidebar -->
+            <div class="span3">
+                <!-- tabs -->
+                <ul id="list_tab" class="nav nav-tabs">
+                    <li class="${'active' if curr_list == 'contacts' else ''}" id="contacts_tab"><a data-toggle="tab" href="#contacts">Contacts</a></li>
+                    <li class="${'active' if curr_list == 'tags' else ''}" id="tags_tab"><a data-toggle="tab" href="#tags">Tags</a></li>
+                </ul>
+                <!-- items -->
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="contacts" tal:attributes="class 'tab-pane fade active in' if curr_list == 'contacts' else 'tab-pane fade'">
+                        <!-- contact search -->
+                        <div class="sort-search">
+                            <button class="${'btn btn-info active' if show_hidden_contacts else 'btn btn-info'}" data-toggle="button" onclick="toggleHiddenContacts()"><div>Show hidden</div></button>
+                            <div class="btn-group pull-left">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Sort
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <a href="#" onclick="sortContacts('az')" tal:attributes="style 'font-weight:bold' if contact_sort_order == 'az' else ''">By contact A-Z</a>
+                                    <a href="#" onclick="sortContacts('za')" tal:attributes="style 'font-weight:bold' if contact_sort_order == 'za' else ''">By contact Z-A</a>
+                                    <a href="#" onclick="sortContacts('unread')" tal:attributes="style 'font-weight:bold' if contact_sort_order == 'unread' else ''">By unread count</a>
+                                </ul>
+                            </div>
+                            <input id="contact_search" name="contact_search" type="text" class="input-medium search-query" placeholder="Search Contacts" tal:attributes="value contact_search">
+                        </div>
+                        <!-- contact list -->
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active" id="all_contacts_pill" tal:attributes="class 'active' if not selected_contacts else ''">
+                                <a href="#">
+                                    <i class="icon-asterisk"></i>&nbsp;All Contacts
+                                    <span class="label-count pull-right" tal:condition="unread_received_ct" tal:content="unread_received_ct"></span>
+                                </a>
+                            </li>
+                            <tal:block repeat="contact contacts">
+                                <li class="contact-pill" tal:attributes="id 'contact%s' % contact[1]; class 'contact-pill active' if contact[1] in selected_contacts else 'contact-pill'">
+                                    <a href="#">
+                                        <i class="icon-user"></i>&nbsp;${contact[2]}
+                                        <span class="label-count pull-right" tal:condition="contact[3]" tal:content="contact[3]"></span>
+                                    </a>
+                                </li>
+                            </tal:block>
+                        </ul>
+                        <!-- actions -->
+                        <button class="btn" disabled="disabled"><div>Hide</div></button>
+                        <button class="btn" disabled="disabled"><div>Delete</div></button>
+                    </div>
+                    <div class="tab-pane fade" id="tags" tal:attributes="class 'tab-pane fade active in' if curr_list == 'tags' else 'tab-pane fade'">
+                        <!-- tag search -->
+                        <div class="sort-search">
+                            <div class="btn-group">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                    Sort
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <a href="#" onclick="sortTags('az')" tal:attributes="style 'font-weight:bold' if tag_sort_order == 'az' else ''">By tag A-Z</a>
+                                    <a href="#" onclick="sortTags('za')" tal:attributes="style 'font-weight:bold' if tag_sort_order == 'za' else ''">By tag Z-A</a>
+                                    <a href="#" onclick="sortTags('unread')" tal:attributes="style 'font-weight:bold' if tag_sort_order == 'unread' else ''">By unread count</a>
+                                </ul>
+                                <input type="text" id="tag_search" name="tag_search" class="input-small search-query pull-right" placeholder="Search Tags" tal:attributes="value tag_search">
+                            </div>
+                        </div>
+                        <!-- tag list -->
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active" id="all_tags_pill" tal:attributes="class 'active' if not selected_tags else ''">
+                                <a href="#">
+                                    <i class="icon-tags"></i>&nbsp;All Tags
+                                    <span class="label-count pull-right" tal:condition="unread_received_ct" tal:content="unread_received_ct"></span>
+                                </a>
+                            </li>
+                            <tal:block repeat="tag tags">
+                                <li class="tag-pill" tal:attributes="id 'tag%s' % tag[1]; class 'tag-pill active' if tag[1] in selected_tags else 'tag-pill'">
+                                    <a href="#">
+                                        <i class="icon-tag"></i>&nbsp;${tag[2]}
+                                        <span class="label-count pull-right" tal:condition="tag[3]" tal:content="tag[3]"></span>
+                                    </a>
+                                </li>
+                            </tal:block>
+                        </ul>
+                        <!-- actions -->
+                        <button class="btn" disabled="disabled"><div>Delete</div></button>
+                    </div>
+                </div>
+            </div>
+            <!-- message list -->
+            <div class="span9">
+                <!-- pagination -->
+                <div class="pagination pull-right">
+                    <ul>
+                        <tal:block repeat="block blocks">
+                            <li class="${'active' if block.current else 'disabled' if not block.available else ''}">
+                                <a href="#" tal:content="structure python:block.label" onclick="${'setMessageIndex(%s)' % block.offset if block.available else ''}"></a>
+                            </li>
+                        </tal:block>
+                    </ul>
+                </div>
+                <!-- tabs -->
+                <ul id="message_tab" class="nav nav-tabs">
+                    <li class="${'active' if curr_view == 'received' else ''}">
+                        <a href="#" onclick="changeMessageView('received')">
+                            Received (${'%s/%s' % (unread_received_ct, total_received_ct) if unread_received_ct else total_received_ct})
+                        </a>
+                    </li>
+                    <li class="${'active' if curr_view == 'sent' else ''}">
+                        <a href="#" onclick="changeMessageView('sent')">
+                            Sent (${total_sent_ct})
+                        </a>
+                    </li>
+                </ul>
+                <!-- sort and search -->
+                <div class="sort-search">
+                    <input type="text" id="message_search" name="message_search" class="input-medium search-query pull-right" placeholder="Search Messages" tal:attributes="value message_search">
+                    <div class="btn-group pull-left">
+                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                            Sort
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <a href="#" onclick="sortMessages('newest')" tal:attributes="style 'font-weight:bold' if message_sort_order == 'newest' else ''">Newest to oldest</a>
+                            <a href="#" onclick="sortMessages('oldest')" tal:attributes="style 'font-weight:bold' if message_sort_order == 'oldest' else ''">Oldest to newest</a>
+                            <a href="#" onclick="sortMessages('az')" tal:attributes="style 'font-weight:bold' if message_sort_order == 'az' else ''">By sender A-Z</a>
+                            <a href="#" onclick="sortMessages('za')" tal:attributes="style 'font-weight:bold' if message_sort_order == 'za' else ''">By sender Z-A</a>
+                        </ul>
+                    </div>
+                    <button class="btn" id="select_all" onclick="toggleSelectedMessages()"><div>Select all</div></button>
+                    <button class="${'btn btn-info active' if show_archived_messages else 'btn btn-info'}" data-toggle="button" onclick="toggleArchivedMessages()">Show archived</button>
+                </div>
+                <!-- items -->
+                <table class="table table-bordered">
+                    <tal:block repeat="acct_message acct_messages">
+                        <tr class="message-row" tal:attributes="class 'message-row%s%s' % (' read' if acct_message.read else '', ' active' if acct_message.id in selected_messages else '')">
+                            <td class="checkbox_cell">
+                                <input type="checkbox" id="message_id" name="message_id" value="${acct_message.id}" tal:attributes="checked acct_message.id in selected_messages">
+                            </td>
+                            <td>
+                                <div class="pull-right">1.3k</div>
+                                <h3><a href="#">${acct_message.message.subject}</a></h3>
+                                <b>${acct_message.message.from_account.display_name}</b>
+                                <i tal:content="acct_message.message.created_date">Today</i>
+                                <span class="label" tal:condition="not:acct_message.read">new</span>
+                                <div class="pull-right">
+                                    <tal:block repeat="tag acct_message.message.tags">
+                                        <span class="label label-info">finances</span>
+                                    </tal:block>
+                                </div>
+                            </td>
+                        </tr>
+                    </tal:block>
+                </table>
+                <!-- actions -->
+                <button class="btn" id="archive_messages"><div>Archive</div></button>
+                <button class="btn" id="delete_messages"><div>Delete</div></button>
+                <!-- items per page -->
+                <ul class="nav nav-pills pull-right">
+                    <li class="${'active' if block_size == 20 else ''}"><a href="#" onclick="setMessageBlockSize(20)">20</a></li>
+                    <li class="${'active' if block_size == 50 else ''}"><a href="#" onclick="setMessageBlockSize(50)">50</a></li>
+                    <li class="${'active' if block_size == 100 else ''}"><a href="#" onclick="setMessageBlockSize(100)">100</a></li>
+                    <li class="${'active' if block_size == 250 else ''}"><a href="#" onclick="setMessageBlockSize(250)">250</a></li>
+                    <li class="${'active' if block_size == 500 else ''}"><a href="#" onclick="setMessageBlockSize(500)">500</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" id="contact_sort_order" name="contact_sort_order" tal:attributes="value contact_sort_order" />
+    <input type="hidden" id="tag_sort_order" name="tag_sort_order" tal:attributes="value tag_sort_order" />
+    <input type="hidden" id="message_sort_order" name="message_sort_order" tal:attributes="value message_sort_order" />
+    <input type="hidden" id="selected_contacts" name="selected_contacts" tal:attributes="value ','.join([str(val) for val in selected_contacts])" />
+    <input type="hidden" id="selected_tags" name="selected_tags" tal:attributes="value ','.join([str(val) for val in selected_tags])" />
+    <input type="hidden" id="selected_messages" name="selected_messages" tal:attributes="value ','.join([str(val) for val in selected_messages])" />
+    <input type="hidden" id="show_hidden_contacts" name="show_hidden_contacts" tal:attributes="value 't' if show_hidden_contacts else 'f'" />
+    <input type="hidden" id="show_archived_messages" name="show_archived_messages" tal:attributes="value 't' if show_archived_messages else 'f'" />
+    <input type="hidden" id="curr_list" name="curr_list" tal:attributes="value curr_list" />
+    <input type="hidden" id="curr_view" name="curr_view" tal:attributes="value curr_view" />
+    <input type="hidden" id="block_size" name="block_size" tal:attributes="value block_size" />
+    <input type="hidden" id="curr_index" name="curr_index" tal:attributes="value curr_index" />
+
+</form>
+
+<script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="js/bootstrap-button.js"></script>
+<script type="text/javascript" src="js/bootstrap-tab.js"></script>
+<script type="text/javascript" src="js/inbox.js"></script>
+
+</body>
+</html>

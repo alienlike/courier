@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+    <title></title>
+    <!-- styles -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/token-input-custom.css" rel="stylesheet">
+    <!-- scripts -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tokeninput.js"></script>
+    <script type="text/javascript" src="js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="js/bootstrap-button.js"></script>
+    <!-- some style tweaks particular to this page -->
+    <style type="text/css">
+
+    </style>
+</head>
+<body style="padding: 20px 0 20px 0;">
+<div class="container">
+
+    <!-- navigation bar -->
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container" style="width: auto;">
+                <!-- branding -->
+                <a class="brand" href="#">Project Courier</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span6">
+            <form class="form-horizontal" action="signup" method="post">
+                <fieldset>
+                    <legend>Sign up</legend>
+                    <div class="control-group ${'' if first_name.valid else 'error'}">
+                        <label class="control-label" for="first_name">First name</label>
+                        <div class="controls">
+                            <input type="text" class="input-large" id="first_name" name="first_name" value="${first_name.value}">
+                            <p class="help-block">Your actual first name</p>
+                        </div>
+                    </div>
+                    <div class="control-group ${'' if last_name.valid else 'error'}">
+                        <label class="control-label" for="last_name">Last name</label>
+                        <div class="controls">
+                            <input type="text" class="input-large" id="last_name" name="last_name" value="${last_name.value}">
+                            <p class="help-block">Your actual last name</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="mobile_phone">Mobile phone</label>
+                        <div class="controls">
+                            <input type="text" class="input-large" id="mobile_phone" name="mobile_phone" disabled>
+                            <p class="help-block">To confirm you are a real person</p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="email_address">Email address</label>
+                        <div class="controls">
+                            <input type="text" class="input-large" id="email_address" name="email_address" disabled>
+                            <p class="help-block">For notifications</p>
+                        </div>
+                    </div>
+                    <div class="control-group ${'' if username.valid else 'error'}">
+                        <label class="control-label" for="username">Preferred username</label>
+                        <div class="controls">
+                            <input type="text" class="input-large" id="username" name="username" value="${username.value}">
+                            <p class="help-block">For login only</p>
+                        </div>
+                    </div>
+                    <div class="control-group ${'' if password.valid else 'error'}">
+                        <label class="control-label" for="password">Password</label>
+                        <div class="controls">
+                            <input type="password" class="input-large" id="password" name="password" value="${password.value}">
+                            <p class="help-block">At least 8 characters</p>
+                        </div>
+                    </div>
+                    <div class="control-group ${'' if pconfirm.valid else 'error'}">
+                        <label class="control-label" for="pconfirm">Confirm password</label>
+                        <div class="controls">
+                            <input type="password" class="input-large" id="pconfirm" name="pconfirm" value="${pconfirm.value}">
+                            <p class="help-block">Must match password</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="img/recaptcha.png">
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary">Continue</button>
+                        <button class="btn">Cancel</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

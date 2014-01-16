@@ -1,0 +1,27 @@
+# Drop this file into /etc/httpd/conf.d
+
+LoadModule wsgi_module modules/mod_wsgi.so
+
+WSGIPythonHome /home/pyramid/python
+
+<VirtualHost *:80>
+
+    ServerName courier.alienlike.net
+    DocumentRoot /home/pyramid/courier
+
+    WSGIScriptAlias / /home/pyramid/courier/wsgi/courier.wsgi
+    WSGIApplicationGroup %{GLOBAL}
+    WSGIPassAuthorization On
+    WSGIDaemonProcess courier.alienlike.net user=pyramid group=www threads=4 \
+       python-path=/home/pyramid/python/lib/python2.6/site-packages
+
+    <Directory /home/pyramid/python>
+      WSGIProcessGroup courier.alienlike.net
+      Order allow,deny
+      Allow from all
+    </Directory>
+
+    ErrorLog logs/courier.alienlike.net-error_log
+    CustomLog logs/courier.alienlike.net-access_log common
+
+</VirtualHost>

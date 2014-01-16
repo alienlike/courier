@@ -1,0 +1,3 @@
+- redesign message delivery to use routes
+- create a view and/or materialized view to flatten relationships for rapid query and stats
+- move file i/o to alchemy commit

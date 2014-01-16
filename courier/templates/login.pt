@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+    <title></title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</head>
+<body style="padding: 20px 0 20px 0;">
+<div class="container">
+
+    <!-- navigation bar -->
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container" style="width: auto;">
+                <!-- branding -->
+                <a class="brand" href="#">Project Courier</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span6">
+            <form class="form-horizontal" action="login" method="post">
+                <fieldset>
+                    <legend>Log in</legend>
+                    <div class="control-group alert alert-error" tal:condition="not:valid">
+                        Invalid username or password.
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="username">Username</label>
+                        <div class="controls">
+                            <input type="text" class="input-large" id="username" name="username" value="${username}">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="password">Password</label>
+                        <div class="controls">
+                            <input type="password" class="input-large" id="password" name="password" value="${password}">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary">Log in</button>
+                        <button class="btn">Cancel</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

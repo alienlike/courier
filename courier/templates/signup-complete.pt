@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+    <title></title>
+    <!-- styles -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/token-input-custom.css" rel="stylesheet">
+    <!-- scripts -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tokeninput.js"></script>
+    <script type="text/javascript" src="js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="js/bootstrap-button.js"></script>
+    <!-- some style tweaks particular to this page -->
+    <style type="text/css">
+
+    </style>
+</head>
+<body style="padding: 20px 0 20px 0;">
+<div class="container">
+
+    <!-- navigation bar -->
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container" style="width: auto;">
+                <!-- branding -->
+                <a class="brand" href="#">Project Courier</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span6">
+            <h2>Welcome to Courier!</h2>
+            <p>
+                <span style="font-style: italic;">Important:</span>
+                All messages in your account are secured
+                with 256-bit AES encryption technology. This means
+                that <span style="font-weight: bold;">we cannot help
+                you in any way if you lose your password.</span>
+                Please make a copy of this recovery
+                key, which will unlock your account in the
+                event that you forget your password. We recommend
+                that you store it in a very safe place.
+            </p>
+            <p><b>Recovery key:</b></p>
+            <div class="well">
+                <h3 tal:content="recovery_key">12345-ABCDE-67890-FGHIJ-12345</h3>
+            </div>
+            <form method="post" action="signup">
+                <label class="checkbox">
+                    <input type="checkbox" id="chkAgree" name="chkAgree" value="yes">
+                    I understand that my account will become permanently inaccessible
+                    if I forget my password and cannot produce my recovery key.
+                </label>
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $('#chkAgree').change(function() {
+                            if (this.checked) {
+                                $('#btnStart').removeAttr("disabled");
+                            }
+                            else {
+                                $('#btnStart').attr("disabled","disabled");
+                            }
+                        })
+                    })
+                </script>
+                <input type="hidden" id="username" name="username" value="${username}">
+                <button id="btnStart" type="submit" class="btn btn-success btn-large" style="margin-top: 10px;" disabled>Get started</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

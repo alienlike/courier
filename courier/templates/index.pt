@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+    <title></title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</head>
+<body style="padding: 20px 0 20px 0;">
+<div class="container">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container" style="width: auto;">
+                <!-- branding -->
+                <a class="brand" href="#">Project Courier</a>
+                <!-- login form -->
+                <div class="nav-collapse pull-right">
+                    <form style="margin: 0 !important;">
+                        <input type="text" class="input-small" style="margin: 6px 0 0 0 !important;" placeholder="Username">
+                        <input type="password" class="input-small" style="margin: 6px 0 0 0 !important;" placeholder="Password">
+                        <button type="submit" class="btn btn-primary btn-small">Log In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- about courier -->
+        <div class="span7" id="body">
+            <h2>Courier delivers messages and documents reliably and securely
+                to your network of trusted contacts.</h2>
+            <dl>
+                <dt>Trust</dt>
+                <dd>Know for sure who sent each message in your inbox.</dd>
+            </dl>
+            <dl>
+                <dt>Security</dt>
+                <dd>Every message is protected with 256-bit AES encryption technology.</dd>
+            </dl>
+            <dl>
+                <dt>Delivery certification</dt>
+                <dd>Confirm delivery and receipt of your messages.</dd>
+            </dl>
+            <dl>
+                <dt>Large documents</dt>
+                <dd>Send messages and documents up to 250Mb in size.</dd>
+            </dl>
+            <dl>
+                <dt>Flexible message types</dt>
+                <dd>Compose messages as rich text, or send a PDF document instead.</dd>
+            </dl>
+            <dl>
+                <dt>No spam</dt>
+                <dd>Receive messages from your trusted contacts only.</dd>
+            </dl>
+        </div>
+        <!-- signup form -->
+        <div class="span5" id="signup">
+            <div class="hero-unit">
+                <h1>Get Courier!</h1>
+                <p>It's free to use for basic accounts.</p>
+                <p>
+                <form method="post" action="signup">
+                    <input type="text" name="first_name" placeholder="First name">
+                    <input type="text" name="last_name" placeholder="Last name">
+                    <button type="submit" class="btn btn-success btn-large">Sign Up</button>
+                </form>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

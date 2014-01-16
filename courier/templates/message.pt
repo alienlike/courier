@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+    <title></title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- some style tweaks particular to this page -->
+    <style type="text/css">
+        .pagination {
+            height: 26px !important;
+            margin: 0 !important;
+        }
+        .pagination a {
+            line-height: 24px;
+        }
+    </style>
+</head>
+<body style="padding: 20px 0 20px 0;">
+<div class="container">
+
+    <!-- navigation bar -->
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container" style="width: auto;">
+                <!-- branding -->
+                <a class="brand" href="#">Project Courier</a>
+                <!-- menu items -->
+                <div class="nav-collapse">
+                    <ul class="nav pull-right">
+                        <li><a href="#">Compose message</a></li>
+                        <li><a href="#">Add contact</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Nathaniel Wingfield
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Account</a></li>
+                                <li><a href="#">Log out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span8">
+
+            <!-- message navigation -->
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="span8">
+                    <!-- inbox button -->
+                    <button class="btn btn-info">Return to inbox</button>
+                    <!-- pagination -->
+                    <div class="pagination pull-right">
+                        <ul>
+                            <li class="disabled"><a href="#">&laquo; Prev</a></li>
+                            <li class="active"><a href="#">1 of 228</a></li>
+                            <li><a href="#">Next &raquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- message header -->
+            <div class="row">
+                <div class="span5">
+                    <!-- message details -->
+                    <h3><a href="#">January Statement</a></h3>
+                    <p>
+                        <b>Wells Fargo Bank</b>
+                        <i>Today</i>
+                    </p>
+                    <p>
+                        To:
+                        <span class="label label-info">nathaniel wingfield</span>
+                    </p>
+                    <p>
+                        Tags:
+                        <span class="label label-info">finances</span>
+                        <span class="label label-info">statement</span>
+                    </p>
+                </div>
+                <div class="span3">
+                    <!-- actions -->
+                    <div class="pull-right">
+                        <button class="btn btn-primary">Reply</button>
+                        <button class="btn"><div>Archive</div></button>
+                        <button class="btn"><div>Delete</div></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- body -->
+            <div class="row">
+                <div class="span8">
+                <!-- message body -->
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam commodo erat
+                    a libero gravida feugiat. Praesent accumsan rhoncus tellus, ut blandit
+                    erat dignissim vel. Praesent dapibus libero a massa interdum lobortis
+                    non vitae urna. Nam vitae turpis augue. Maecenas in ligula nulla, eget
+                    condimentum lectus. Praesent mauris nisi, congue quis cursus eget,
+                    vehicula non diam. Cras non magna non diam viverra adipiscing. Sed et
+                    velit a ipsum cursus varius id faucibus metus. Donec quis ullamcorper
+                    felis. Maecenas nec ante felis, sit amet commodo dui. Sed vel tortor
+                    ac justo adipiscing molestie eget a magna. Suspendisse lorem nulla,
+                    faucibus quis tincidunt in, tincidunt eu mauris. Pellentesque in pharetra
+                    diam. Quisque suscipit, quam vel molestie dictum, elit libero cursus mi,
+                    eget cursus dolor lectus id felis. Vestibulum quis sapien turpis.
+                    Pellentesque et magna eu ipsum lacinia rhoncus.
+                </p>
+                <p>
+                    Ut lacinia nisi a leo viverra ornare. In hac habitasse platea dictumst.
+                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames
+                    ac turpis egestas. Cras in lacus felis. Donec arcu nisl, tincidunt nec
+                    convallis ac, posuere non dolor. Donec scelerisque neque quis leo ornare
+                    vel pellentesque augue ultricies. Praesent vehicula, urna id blandit
+                    fermentum, metus ipsum venenatis diam, sed suscipit sapien nisi vitae
+                    arcu. In vitae scelerisque nulla. Nunc et eleifend ipsum. Vestibulum vitae
+                    mauris mollis purus accumsan commodo et a sapien. Nullam adipiscing eros
+                    consequat elit auctor pellentesque. Etiam aliquet viverra dignissim. Sed
+                    varius commodo sodales.
+                </p>
+                <p>
+                    Praesent feugiat justo ac lectus aliquam quis commodo velit pretium. Fusce
+                    in vestibulum est. Quisque a lorem diam, sit amet pharetra dolor. Vivamus
+                    a lectus ut tellus pretium rutrum. Maecenas nec elit eu lorem tincidunt
+                    eleifend sit amet et risus. Praesent felis quam, pulvinar vitae varius et,
+                    egestas vel nibh. Proin consectetur adipiscing lectus et condimentum.
+                </p>
+                <p>
+                    Vivamus in posuere nisl. Duis a lectus erat. Duis vel dictum nulla.
+                    Suspendisse potenti. Curabitur at eros nec mi gravida scelerisque. Lorem
+                    ipsum dolor sit amet, consectetur adipiscing elit. Donec vel leo quis
+                    sapien rhoncus dignissim vel sed felis.
+                </p>
+                <p>
+                    Ut scelerisque aliquam mi a cursus. Sed mattis cursus augue et pellentesque.
+                    Nam egestas, urna nec tristique pharetra, elit metus convallis arcu, at
+                    pretium ante enim a velit. Ut sodales vestibulum risus, ullamcorper mattis
+                    nibh ultrices eget. Mauris lacinia, urna id consectetur euismod, velit velit
+                    ultrices dui, id vehicula enim sapien id orci. Nulla mi urna, iaculis sed
+                    bibendum ac, eleifend in lectus. Cras volutpat tortor dui. Vestibulum
+                    sodales diam id orci ornare pulvinar ac eu tellus. Praesent ac orci augue.
+                    Proin mattis mattis nisl quis interdum. Phasellus vitae metus non justo
+                    consequat tempor. Nullam gravida, est sit amet pretium suscipit, augue arcu
+                    luctus enim, ac tristique purus nisl congue velit. Pellentesque libero metus,
+                    convallis ut congue at, cursus vitae mauris. Phasellus et quam nec mi
+                    fringilla volutpat fermentum at nisi.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="js/bootstrap-button.js"></script>
+</body>
+</html>
